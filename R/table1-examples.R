@@ -92,3 +92,5 @@ fivenum(nlsy$sleep_wkdy)
 fivenum(nlsy$sleep_wknd)
 
 ?tab_footnote()
+
+
