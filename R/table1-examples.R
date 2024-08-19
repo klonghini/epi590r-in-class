@@ -75,15 +75,18 @@ tbl_summary(
 		income ~ "10th percentile = {p10}; 90th percentile = {p90}"
 		),
 	digits = list(
-		starts_with("sleep") ~ c(1, 1),
-		income ~ c(3, 3)
+		starts_with("sleep") ~ 1,
+		income ~ 3
 								),
 	missing_text = "Missing") %>%
 	add_p(test = list(all_continuous() ~ "t.test",
 										all_categorical() ~ "chisq.test")) %>%
 	add_overall(col_label = "**Total**") %>%
 	bold_labels() %>%
-	modify_footnote(update = everything() ~ "Race/ethnicity variable
+	modify_table_styling(
+		columns = label,
+		rows = label == "Race/ethnicity",
+		footnote = "Race/ethnicity variable
 	link to the page describing how NLSY classified participants:
 	https://www.nlsinfo.org/content/cohorts/nlsy79/topical-guide/household/race-ethnicity-immigration-data") %>%
 	modify_header(label = "**Variable**", p.value = "**P**")
@@ -91,6 +94,10 @@ tbl_summary(
 fivenum(nlsy$sleep_wkdy)
 fivenum(nlsy$sleep_wknd)
 
-?tab_footnote()
 
+
+modify_footnote(update = everything() ~ "Race/ethnicity variable
+	link to the page describing how NLSY classified participants:
+	https://www.nlsinfo.org/content/cohorts/nlsy79/topical-guide/household/race-ethnicity-immigration-data") %>%
+	modify_header(label = "**Variable**", p.value = "**P**")
 
