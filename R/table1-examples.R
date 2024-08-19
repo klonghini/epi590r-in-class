@@ -57,3 +57,38 @@ tbl_summary(
 	modify_footnote(update = everything() ~ NA) |>
 	modify_header(label = "**Variable**", p.value = "**P**")
 
+
+# My practice
+tbl_summary(
+	nlsy,
+	include = c(region_cat, race_eth_cat, income, starts_with("sleep")),
+	by = sex_cat,
+	label = list(
+		region_cat ~ "Region",
+		race_eth_cat ~ "Race/ethnicity",
+		sleep_wkdy ~ "Weekday sleep (hours)",
+		sleep_wknd ~ "Weekend sleep (hours)",
+		income ~ "Income"
+		),
+	statistic = list(
+		starts_with("sleep") ~ "min = {min}; max = {max}",
+		income ~ "10th percentile = {p10}; 90th percentile = {p90}"
+		),
+	digits = list(
+		starts_with("sleep") ~ c(1, 1),
+		income ~ c(3, 3)
+								),
+	missing_text = "Missing") %>%
+	add_p(test = list(all_continuous() ~ "t.test",
+										all_categorical() ~ "chisq.test")) %>%
+	add_overall(col_label = "**Total**") %>%
+	bold_labels() %>%
+	modify_footnote(update = everything() ~ "Race/ethnicity variable
+	link to the page describing how NLSY classified participants:
+	https://www.nlsinfo.org/content/cohorts/nlsy79/topical-guide/household/race-ethnicity-immigration-data") %>%
+	modify_header(label = "**Variable**", p.value = "**P**")
+
+fivenum(nlsy$sleep_wkdy)
+fivenum(nlsy$sleep_wknd)
+
+?tab_footnote()
