@@ -95,3 +95,52 @@ tbl_int <- tbl_regression(
 
 tbl_merge(list(tbl_no_int, tbl_int),
 					tab_spanner = c("**Model 1**", "**Model 2**"))
+
+
+# My practice
+
+# SEE HER POSTED CODE
+
+tbl_uvregression(
+	nlsy,
+	x = sex_cat,
+	include = c(nsibs, income, sleep_wkdy, sleep_wknd),
+	method = lm)
+
+tbl_uvregression(
+	nlsy,
+	y = nsibs,
+	include = c(race_eth, sex, region),
+	method = glm,
+	method.args = list(family = poisson()))
+
+
+logistic_model_1 <- glm(glasses ~ eyesight_cat + sex_cat,
+											data = nlsy, family = binomial(link = "log"))
+tbl_regression(
+	logistic_model_1,
+	exponentiate = TRUE,
+	label = list(
+		sex_cat ~ "Sex",
+		eyesight_cat ~ "Eyesight"
+	))
+
+poisson_model <- glm(glasses ~ eyesight_cat + sex_cat,
+												data = nlsy, family = poisson())
+tbl_regression(
+	poisson_model,
+	exponentiate = TRUE,
+	label = list(
+		sex_cat ~ "Sex",
+		eyesight_cat ~ "Eyesight"
+	))
+
+tidy_fun = partial(tidy_robust, vcov = "HC1")
+
+
+
+
+
+
+
+
