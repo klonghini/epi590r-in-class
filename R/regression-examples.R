@@ -135,7 +135,9 @@ tbl_regression(
 		eyesight_cat ~ "Eyesight"
 	))
 
+
 tidy_fun = partial(tidy_robust, vcov = "HC1")
+
 
 
 
