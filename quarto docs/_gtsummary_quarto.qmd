@@ -84,3 +84,49 @@ The mean number of hours of sleep on weekends is `r mean(nlsy$sleep_wknd, na.rm 
 The median number of hours of sleep on weekends is `r median_wknd_sleep`. 
 
 The median number of hours of sleep on weekends is `r median(nlsy$sleep_wknd, na.rm = T)`.
+
+
+```{r}
+#| label: tbl-descr
+#| tbl-cap: "Descriptive statistics"
+table1 <- tbl_summary(
+  nlsy,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir)) |> 
+  add_overall(last = TRUE)
+table1
+```
+
+```{r}
+table1$table_body
+```
+
+```{r}
+inline_text(table1, variable = "age_bir", column = "stat_1")
+inline_text(table1, variable = "region_cat", level = "West",column = "stat_2")
+	
+
+```
+
+```{r}
+table2 <- tbl_summary(
+  nlsy,
+  include = c(sleep_wknd))
+table2
+
+table2$table_body
+
+```
+
+```{r}
+sleep_wknd_median <- inline_text(table2, variable = "sleep_wknd", 
+                         column = "stat_0")
+```
+
+The median weekend sleep hours is `r sleep_wknd_median`. 
+
+
+
+
+
