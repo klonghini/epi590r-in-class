@@ -3,6 +3,7 @@ title: "gtsummary in quarto"
 format:
   html:
     theme: pandoc 
+    embed-resources: true
 execute: 
   echo: false
 ---

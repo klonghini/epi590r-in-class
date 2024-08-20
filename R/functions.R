@@ -110,4 +110,18 @@ new_table_function <- function(model) {
 }
 
 
+new_table_function <- function(model, tidy_fun = broom.helpers::tidy_with_broom_or_parameters) {
+	tbl_regression(
+		model,
+		exponentiate = TRUE,
+		label = list(
+			sex_cat ~ "Sex",
+			eyesight_cat ~ "Eyesight"
+		),
+		tidy_fun = tidy_fun
+	)
+}
+
+
+
 
