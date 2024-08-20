@@ -33,12 +33,17 @@ nlsy <- read_csv(here::here("data", "raw", "nlsy.csv"),
 # Customization of `tbl_summary()`
 
 ```{r}
+#| label: tbl-one
+#| tbl-cap: "This is a great table"
+
 tbl_summary(
   nlsy,
   by = sex_cat,
   include = c(sex_cat, race_eth_cat, region_cat,
               eyesight_cat, glasses, age_bir))
 ```
+
+@tbl-one shows the descriptive statistics
 
 ```{r}
 tbl_summary(
@@ -57,9 +62,25 @@ tbl_summary(
 ```
 
 ```{r}
+#| label: Last table
+
 tbl_summary(
   nlsy,
   by = sex_cat,
   include = c(sex_cat, race_eth_cat, region_cat,
               eyesight_cat, glasses, age_bir))
 ```
+
+```{r}
+mean_wknd_sleep <- mean(nlsy$sleep_wknd, na.rm = T)
+
+median_wknd_sleep <- median(nlsy$sleep_wknd, na.rm = T)
+```
+
+The mean number of hours of sleep on weekends is `r mean_wknd_sleep`. 
+
+The mean number of hours of sleep on weekends is `r mean(nlsy$sleep_wknd, na.rm = T)`.
+
+The median number of hours of sleep on weekends is `r median_wknd_sleep`. 
+
+The median number of hours of sleep on weekends is `r median(nlsy$sleep_wknd, na.rm = T)`.
